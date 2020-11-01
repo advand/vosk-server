@@ -39,7 +39,7 @@ loop = asyncio.get_event_loop()
 def process_chunk(rec, message):
     if message == '{"eof" : 1}':
         return rec.FinalResult(), True
-    elif rec.AcceptWaveform(message):
+    elif rec.AcceptWaveform(message) or message == '{"eow": 1}':
         return rec.Result(), False
     else:
         return rec.PartialResult(), False
